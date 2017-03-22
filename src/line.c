@@ -6,18 +6,22 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:50:45 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/22 14:53:05 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/03/22 16:16:04 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/mlx.h"
 #include "../include/fdf.h"
+#include <stdlib.h>
+#include <math.h>
+
+// ! attention avec la fonction abs, a verifier sir utilisable ou pas !
 
 void		init_line(t_line *line, t_pixel a, t_pixel b)
 {
-	line->dx = b.x - a.x < 0 ? -(b.x - a.x) : b.x - a.x;
+	line->dx = abs(b.x - a.x);
 	line->sx = a.x < b.x ? 1 : -1;
-	line->dy = b.y - a.y < 0 ? -(b.y - a.y) : b.y - a.y;
+	line->dy = abs(b.y - a.y);
 	line->sy = a.y < b.y ? 1 : -1;
 	line->err = (line->dx > line->dy ? line->dx : -line->dy) / 2;
 }
