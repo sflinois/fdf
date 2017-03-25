@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_digit_to_char.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/12 12:20:02 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/25 17:02:11 by sflinois         ###   ########.fr       */
+/*   Created: 2017/01/10 14:57:40 by sflinois          #+#    #+#             */
+/*   Updated: 2017/01/10 16:11:50 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "../includes/libft.h"
 
-typedef struct	s_pixel
+char	ft_digit_to_char(int d, int base, int maj)
 {
-	int		x;
-	int		y;
-}				t_pixel;
-
-typedef struct s_line
-{
-	int		dx;
-	int		sx;
-	int		dy;
-	int		sy;
-	int		err;
-	int		err2;
-}			t_line;
-
-typedef struct s_map
-{
-	int		max_x;
-	int		max_y;
-	int		max_z;
-	int		**p;
-}				t_map;
-
-void		draw_line(void *mlx, void *win, t_pixel a, t_pixel b);
-int			pars_args(char **argv, t_map *map);
-#endif
+	if (base > 2 && base <= 16)
+	{
+		if (d >= 0 && d <= base)
+		{
+			if (d < 10)
+				return (d + '0');
+			if (d >= 10)
+			{
+				if (maj)
+					return (d + 'A' - 10);
+				else
+					return (d + 'a' - 10);
+			}
+		}
+	}
+	return ('X');
+}

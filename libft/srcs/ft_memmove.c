@@ -1,42 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/12 12:20:02 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/25 17:02:11 by sflinois         ###   ########.fr       */
+/*   Created: 2016/11/10 10:23:05 by sflinois          #+#    #+#             */
+/*   Updated: 2017/01/10 13:30:52 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "../includes/libft.h"
+#include <string.h>
+#include <stdlib.h>
 
-typedef struct	s_pixel
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	int		x;
-	int		y;
-}				t_pixel;
+	unsigned int		i;
 
-typedef struct s_line
-{
-	int		dx;
-	int		sx;
-	int		dy;
-	int		sy;
-	int		err;
-	int		err2;
-}			t_line;
-
-typedef struct s_map
-{
-	int		max_x;
-	int		max_y;
-	int		max_z;
-	int		**p;
-}				t_map;
-
-void		draw_line(void *mlx, void *win, t_pixel a, t_pixel b);
-int			pars_args(char **argv, t_map *map);
-#endif
+	i = 0;
+	if (dst > src)
+	{
+		while (len > 0)
+		{
+			len--;
+			*(unsigned char*)(dst + len) = *(unsigned char*)(src + len);
+		}
+	}
+	else
+	{
+		while (i < len)
+		{
+			*(unsigned char*)(dst + i) = *(unsigned char*)(src + i);
+			i++;
+		}
+	}
+	return (dst);
+}

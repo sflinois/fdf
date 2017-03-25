@@ -1,42 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/12 12:20:02 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/25 17:02:11 by sflinois         ###   ########.fr       */
+/*   Created: 2016/11/06 16:24:51 by sflinois          #+#    #+#             */
+/*   Updated: 2017/01/10 13:30:52 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "../includes/libft.h"
+#include <string.h>
 
-typedef struct	s_pixel
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	int		x;
-	int		y;
-}				t_pixel;
+	size_t	dst_len;
+	size_t	src_len;
+	size_t	i;
 
-typedef struct s_line
-{
-	int		dx;
-	int		sx;
-	int		dy;
-	int		sy;
-	int		err;
-	int		err2;
-}			t_line;
-
-typedef struct s_map
-{
-	int		max_x;
-	int		max_y;
-	int		max_z;
-	int		**p;
-}				t_map;
-
-void		draw_line(void *mlx, void *win, t_pixel a, t_pixel b);
-int			pars_args(char **argv, t_map *map);
-#endif
+	dst_len = ft_strlen(dst);
+	src_len = ft_strlen(src);
+	i = 0;
+	if (dst_len > size)
+		return (size + src_len);
+	while (dst_len + i < size - 1 && src[i])
+	{
+		dst[dst_len + i] = src[i];
+		i++;
+	}
+	dst[dst_len + i] = '\0';
+	return (dst_len + src_len);
+}

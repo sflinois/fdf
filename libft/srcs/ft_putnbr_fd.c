@@ -1,42 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/12 12:20:02 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/25 17:02:11 by sflinois         ###   ########.fr       */
+/*   Created: 2016/11/06 14:37:51 by sflinois          #+#    #+#             */
+/*   Updated: 2017/01/10 13:30:52 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "../includes/libft.h"
+#include <unistd.h>
 
-typedef struct	s_pixel
+void	ft_putnbr_fd(int n, int fd)
 {
-	int		x;
-	int		y;
-}				t_pixel;
-
-typedef struct s_line
-{
-	int		dx;
-	int		sx;
-	int		dy;
-	int		sy;
-	int		err;
-	int		err2;
-}			t_line;
-
-typedef struct s_map
-{
-	int		max_x;
-	int		max_y;
-	int		max_z;
-	int		**p;
-}				t_map;
-
-void		draw_line(void *mlx, void *win, t_pixel a, t_pixel b);
-int			pars_args(char **argv, t_map *map);
-#endif
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		if (n == -2147483648)
+		{
+			ft_putchar_fd('2', fd);
+			n = -147483648;
+		}
+		n = -n;
+	}
+	if (n > 9)
+		ft_putnbr_fd(n / 10, fd);
+	ft_putchar_fd(n % 10 + 48, fd);
+}

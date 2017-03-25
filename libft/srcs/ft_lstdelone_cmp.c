@@ -1,42 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_lstdelone_cmp.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/12 12:20:02 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/25 17:02:11 by sflinois         ###   ########.fr       */
+/*   Created: 2017/01/07 09:56:48 by sflinois          #+#    #+#             */
+/*   Updated: 2017/01/10 13:30:52 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "../includes/libft.h"
+#include <string.h>
+#include <stdlib.h>
 
-typedef struct	s_pixel
+void	ft_lstdelone_cmp(t_list **lst, t_list **del)
 {
-	int		x;
-	int		y;
-}				t_pixel;
+	t_list	*prev;
+	t_list	*tmp;
 
-typedef struct s_line
-{
-	int		dx;
-	int		sx;
-	int		dy;
-	int		sy;
-	int		err;
-	int		err2;
-}			t_line;
-
-typedef struct s_map
-{
-	int		max_x;
-	int		max_y;
-	int		max_z;
-	int		**p;
-}				t_map;
-
-void		draw_line(void *mlx, void *win, t_pixel a, t_pixel b);
-int			pars_args(char **argv, t_map *map);
-#endif
+	tmp = *lst;
+	if (tmp == *del)
+	{
+		*lst = tmp->next;
+		free(tmp->content);
+		free(tmp);
+		return ;
+	}
+	prev = *lst;
+	tmp = (*lst)->next;
+	while (tmp != *del)
+	{
+		prev = tmp;
+		tmp = tmp->next;
+	}
+	prev->next = tmp->next;
+	free(tmp->content);
+	free(tmp);
+}

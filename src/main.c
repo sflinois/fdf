@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 08:44:49 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/22 16:23:32 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/03/25 17:29:39 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include "../include/mlx.h"
 #include "../include/fdf.h"
+#include "../libft/includes/libft.h"
 
 int		end_prog(int keycode, void *param)
 {
@@ -29,18 +30,30 @@ int		main(int argc, char **argv)
 	void	*win;
 	t_map	map;
 	int		end;
+	int		ret;
 	t_pixel	a;
 	t_pixel	b;
 
 	if (argc != 2)
 	{
 		// modif des usages : price en compre de case_size et z_size (demo)
-		printf("Usage : ./fdf <filename>\n");
+		ft_printf("Usage : ./fdf <filename>\n");
 		return (1);
 	}
-	if (pars_args(argv, &map) == -1)
+	ret = pars_args(argv, &map);
+	if (ret == -1)
 	{
-		printf("Found wrong line length. Exiting.\n");
+		ft_printf("No file %s\n", argv[1]);
+		return (1);
+	}
+	if (ret == -2)
+	{
+		ft_printf("No data found.\n");
+		return (1);
+	}
+	if (ret == -3)
+	{
+		ft_printf("Found wrong line length. Exiting.\n");
 		return (1);
 	}
 

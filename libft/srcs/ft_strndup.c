@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/12 12:20:02 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/25 17:02:11 by sflinois         ###   ########.fr       */
+/*   Created: 2016/12/05 10:44:36 by sflinois          #+#    #+#             */
+/*   Updated: 2017/03/18 16:44:13 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include <string.h>
+#include <stdlib.h>
+#include "../includes/libft.h"
 
-typedef struct	s_pixel
+char	*ft_strndup(const char *s1, size_t n)
 {
-	int		x;
-	int		y;
-}				t_pixel;
+	char		*s2;
+	size_t		len;
 
-typedef struct s_line
-{
-	int		dx;
-	int		sx;
-	int		dy;
-	int		sy;
-	int		err;
-	int		err2;
-}			t_line;
-
-typedef struct s_map
-{
-	int		max_x;
-	int		max_y;
-	int		max_z;
-	int		**p;
-}				t_map;
-
-void		draw_line(void *mlx, void *win, t_pixel a, t_pixel b);
-int			pars_args(char **argv, t_map *map);
-#endif
+	len = 0;
+	while (s1[len] && len < n)
+		len++;
+	if (n < len)
+		len = n;
+	if (!(s2 = (char*)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	ft_bzero((void*)s2, len + 1);
+	while (len-- > 0)
+		s2[len] = s1[len];
+	return (s2);
+}
