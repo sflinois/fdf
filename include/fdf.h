@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 12:20:02 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/25 17:02:11 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/03/26 17:19:48 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@ typedef struct s_map
 	int		**p;
 }				t_map;
 
-void		draw_line(void *mlx, void *win, t_pixel a, t_pixel b);
-int			pars_args(char **argv, t_map *map);
+typedef struct	s_struct
+{
+	int			w_maxx;
+	int			w_maxy;
+	t_pixel		pixs[2];
+	t_map		map;
+}				t_struct;
+
+void		draw_line(void *mlx, void *win, t_struct *s);
+void		draw_map(void *mlx, void *win, t_struct *s);
+int			pars_args(char **argv, t_struct *s);
 #endif

@@ -6,11 +6,12 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 08:44:49 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/25 17:40:48 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/03/26 17:34:54 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include "../include/mlx.h"
 #include "../include/fdf.h"
@@ -26,13 +27,10 @@ int		end_prog(int keycode, void *param)
 
 int		main(int argc, char **argv)
 {
-	void	*mlx;
-	void	*win;
-	t_map	map;
-	int		end;
-	int		ret;
-	t_pixel	a;
-	t_pixel	b;
+	void		*mlx;
+	void		*win;
+	t_struct	s;
+	int			ret;
 
 	if (argc != 2)
 	{
@@ -40,7 +38,7 @@ int		main(int argc, char **argv)
 		ft_printf("Usage : ./fdf <filename>\n");
 		return (1);
 	}
-	ret = pars_args(argv, &map);
+	ret = pars_args(argv, &s);
 	if (ret == -1)
 	{
 		ft_printf("No file %s\n", argv[1]);
@@ -56,18 +54,12 @@ int		main(int argc, char **argv)
 		ft_printf("Found wrong line length. Exiting.\n");
 		return (1);
 	}
-
-	argv = NULL;
-	a.x = 200;
-	a.y = 200;
-	b.x = 200 - 20;
-	b.y = 200 + 20;
-	end = 0;
+	s.w_maxx = 1400;
+	s.w_maxy = 800;
 	mlx = mlx_init();
-	win = mlx_new_window(mlx, 400, 400, "fdf");
-	draw_line(mlx, win, a, b);
+	win = mlx_new_window(mlx, s.w_maxx, s.w_maxy, "fdf");
+	draw_map(mlx, win, &s);
 	mlx_key_hook(win, end_prog, 0);
-	if (end != 1)
-		mlx_loop(mlx);
+	mlx_loop(mlx);
 	return (0);
 }

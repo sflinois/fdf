@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 16:06:08 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/25 17:25:00 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/03/26 17:34:18 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,30 +104,30 @@ int		insert_in_map(int fd, t_map *map)
 	return (1);
 }
 
-int		pars_args(char **argv, t_map *map)
+int		pars_args(char **argv, t_struct *s)
 {
 	int		fd;
 	int		i;
 	int		ret;
 
-	map->max_x = 0;
-	map->max_y = 0;
-	map->max_z = 0;
+	s->map.max_x = 0;
+	s->map.max_y = 0;
+	s->map.max_z = 0;
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (-1);
-	if ((ret = check_first_line_map(fd, map)) != 1)
+	if ((ret = check_first_line_map(fd, &s->map)) != 1)
 		return (ret);
-	if ((ret = check_lines_map(fd, map)) != 1)
+	if ((ret = check_lines_map(fd, &s->map)) != 1)
 		return (ret);
 	close(fd);
 	i = 0;
-	map->p = (int**)malloc(sizeof(int*) * map->max_y);
-	while (i < map->max_y)
-		map->p[i++] = (int*)malloc(sizeof(int) * map->max_x);
+	s->map.p = (int**)malloc(sizeof(int*) * s->map.max_y);
+	while (i < s->map.max_y)
+		s->map.p[i++] = (int*)malloc(sizeof(int) * s->map.max_x);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (-1);
-	insert_in_map(fd, map);
+	insert_in_map(fd, &s->map);
 	return (1);
 }
