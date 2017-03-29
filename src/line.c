@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:50:45 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/26 17:37:12 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/03/29 15:40:29 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,25 @@ void		draw_line(void *mlx, void *win, t_struct *s)
 {
 	t_line	line;
 
-	init_line(&line, s->pixs[0], s->pixs[1]);
-	mlx_pixel_put(mlx, win, s->pixs[0].x, s->pixs[0].y, 0xFFFFFF);
+	init_line(&line, s->pix[0], s->pix[1]);
+	mlx_pixel_put(mlx, win, s->pix[0].x, s->pix[0].y, 0xFFFFFF);
 	// Le while est pas bon, remplacement du && par || !!!!!!!!
-	while ((s->pixs[0].x != s->pixs[1].x) || (s->pixs[0].y != s->pixs[1].y))
+	while ((s->pix[0].x != s->pix[1].x) || (s->pix[0].y != s->pix[1].y))
 	{
-	ft_printf("x0 x1 : %d %d y0 y1 : %d %d\n", s->pixs[0].x, s->pixs[1].x, s->pixs[0].y, s->pixs[1].y);
 		line.err2 = line.err;
 		if (line.err2 > -line.dx)
 		{
 			line.err -= line.dy;
-			s->pixs[0].x += line.sx;
+			s->pix[0].x += line.sx;
 		}
 		if (line.err2 < line.dy)
 		{
 			line.err += line.dx;
-			s->pixs[0].y += line.sy;
+			s->pix[0].y += line.sy;
 		}
-		if (s->pixs[0].x > 0 && s->pixs[0].x < s->w_maxx && s->pixs[0].y > 0 &&
-				s->pixs[0].y < s->w_maxy)
-			mlx_pixel_put(mlx, win, s->pixs[0].x, s->pixs[0].y, 0xFFFFFF);
+		if (s->pix[0].x > 0 && s->pix[0].x < s->w_maxx && s->pix[0].y > 0 &&
+				s->pix[0].y < s->w_maxy)
+			mlx_pixel_put(mlx, win, s->pix[0].x, s->pix[0].y, 0xFFFFFF);
 	}
 }
 
@@ -58,23 +57,27 @@ void		draw_map(void *mlx, void *win, t_struct *s)
 {
 	int		x;
 	int		y;
+	int		t_s;
 
+	t_s = 25;
 	y = 0;
 	while (y < s->map.max_y)
 	{
 		x = 0;
 		while (x < s->map.max_x)
 		{
-			s->pixs[0].x = x * 50 + 10;
-			s->pixs[0].y = y * 50 + 10;
-			s->pixs[1].x = (x + 1) * 50 + 10;
-			s->pixs[1].y = y * 50 + 10;
-			draw_line(mlx, win, s);
-			s->pixs[0].x = x * 50 + 10;
-			s->pixs[0].y = y * 50 + 10;
-			s->pixs[1].x = x * 50 + 10;
-			s->pixs[1].y = (y + 1) * 50 + 10;
-			draw_line(mlx, win, s);
+			if (x + 1 < s->map.max_x)
+			{
+				s->pix[0] = s->map.p[y][x];
+				s->pix[1] = s->map.p[y][x + 1];
+				draw_line(mlx, win, s);
+			}
+			if (y + 1 < s->map.max_y)
+			{
+				s->pix[0] = s->map.p[y][x];
+				s->pix[1] = s->map.p[y + 1][x];
+				draw_line(mlx, win, s);
+			}
 			x++;
 		}
 		y++;

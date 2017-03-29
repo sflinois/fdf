@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 08:44:49 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/26 17:34:54 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/03/29 13:40:00 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ int		main(int argc, char **argv)
 		ft_printf("Found wrong line length. Exiting.\n");
 		return (1);
 	}
-	s.w_maxx = 1400;
-	s.w_maxy = 800;
+	apply_proj(&s);
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, s.w_maxx, s.w_maxy, "fdf");
 	draw_map(mlx, win, &s);

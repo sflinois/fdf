@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 16:06:08 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/26 17:34:18 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/03/29 13:25:54 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,11 @@ int		insert_in_map(int fd, t_map *map)
 			while (str[i] == ' ' || str[i] == '\t')
 				i++;
 			if (str[i])
-				map->p[y][x] = ft_atoi(str + i);
+			{
+				map->p[y][x].x = x;
+				map->p[y][x].y = y;
+				map->p[y][x].z = ft_atoi(str + i);
+			}
 			while (str[i] && str[i] != ' ' && str[i] != '\t')
 				i++;
 			x++;
@@ -122,9 +126,9 @@ int		pars_args(char **argv, t_struct *s)
 		return (ret);
 	close(fd);
 	i = 0;
-	s->map.p = (int**)malloc(sizeof(int*) * s->map.max_y);
+	s->map.p = (t_pixel**)malloc(sizeof(t_pixel*) * s->map.max_y);
 	while (i < s->map.max_y)
-		s->map.p[i++] = (int*)malloc(sizeof(int) * s->map.max_x);
+		s->map.p[i++] = (t_pixel*)malloc(sizeof(t_pixel) * s->map.max_x);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (-1);
