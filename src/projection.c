@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 11:45:32 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/29 15:41:02 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/04/19 15:27:37 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ void	apply_proj(t_struct *s)
 		x = 0;
 		while (x < s->map.max_x)
 		{
-			calc_z = (s->map.p[y][x].z / s->map.max_z) * p.max_heigth;
+			calc_z = s->map.max_z != 0 ?
+				(s->map.p[y][x].z / s->map.max_z) * p.max_heigth
+				: (s->map.p[y][x].z) * p.max_heigth ;
 			s->map.p[y][x].x = (x - y) * p.half_tw;
 			s->map.p[y][x].y = (x + y) * p.half_tl - calc_z;
 			if (s->map.p[y][x].x > p.max_len)
