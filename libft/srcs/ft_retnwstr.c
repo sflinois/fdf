@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/18 15:11:41 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/18 16:40:23 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/04/19 11:39:36 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,17 @@ char	*ft_retnwstr(wchar_t *wstr, size_t size)
 	while (*wstr)
 	{
 		tmp = ret;
-		tmp2 = ft_retwchar(*wstr);
+		if (!(tmp2 = ft_retwchar(*wstr)))
+		{
+			free(tmp);
+			return (NULL);
+		}
 		if (ft_strlen(tmp) + ft_strlen(tmp2) > size)
 		{
 			free(tmp2);
 			return (tmp);
 		}
-		ret = ft_strjoin(tmp, tmp2);
-		free(tmp);
-		free(tmp2);
+		ret = ft_strjoin_free(tmp, tmp2);
 		wstr++;
 	}
 	return (ret);

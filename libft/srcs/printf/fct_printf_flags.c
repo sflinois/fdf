@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 16:38:09 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/19 14:23:10 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/04/29 15:37:05 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ char	*applyflag_zero(char *str, t_expr expr)
 {
 	int		i;
 
-	if (!str || expr.flags & F_MINUS || !ft_strchr("diouxXsc%", (int)expr.type))
+	if (!str || expr.flags & F_MINUS ||
+			!ft_strchr("dDioOuUxXsc%", (int)expr.type))
 		return (str);
 	i = 0;
 	while (str[i] && expr.precision == -1)

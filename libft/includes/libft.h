@@ -6,15 +6,15 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 11:22:10 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/26 15:29:18 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/04/29 16:04:20 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 
 # define LIBFT_H
-# include "get_next_line.h"
-# include "ft_printf.h"
+# define BUFF_SIZE 32
+
 # include <string.h>
 # include <inttypes.h>
 # include <wchar.h>
@@ -32,6 +32,13 @@ typedef struct		s_btree
 	struct s_btree	*right;
 	void			*item;
 }					t_btree;
+
+typedef struct		s_matrix
+{
+	int				nb_line;
+	int				nb_col;
+	int				**m;
+}					t_matrix;
 
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
@@ -73,9 +80,11 @@ int					ft_strequ(char const *s1, char const *s2);
 void				ft_striter(char *s, void (*f)(char *));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strjoin_free(char *s1, char *s2);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
 size_t				ft_strlen(const char *s);
 size_t				ft_wstrlen(wchar_t *wstr);
+size_t				ft_wcharlen(wchar_t wc);
 char				*ft_strmap(char const *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strncat(char *s1, const char *s2, size_t n);
@@ -120,5 +129,6 @@ char				*ft_retwstr(wchar_t *wstr);
 char				*ft_retnwstr(wchar_t *wstr, size_t size);
 int					get_next_line(const int fd, char **line);
 int					ft_printf(const char *format, ...);
+t_matrix			*ft_mtxnew(int nb_rows, int nb_cols, int **tab);
 
 #endif

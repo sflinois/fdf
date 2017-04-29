@@ -6,11 +6,10 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 11:10:10 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/25 17:02:05 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/04/29 16:05:54 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/get_next_line.h"
 #include "../includes/libft.h"
 #include <sys/types.h>
 #include <sys/uio.h>

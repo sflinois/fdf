@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 17:47:25 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/19 12:55:19 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/04/20 15:43:38 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*apply_precision(char *str, t_expr expr)
 	ret = NULL;
 	if (!str || expr.precision == -1)
 		return (str);
-	if (ft_strchr("diboOuxX", (int)expr.type))
+	if (ft_strchr("dDiboOuUxX", (int)expr.type))
 		return (apply_precision_int(str, expr, ret));
 	return (str);
 }

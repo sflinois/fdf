@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 15:24:30 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/25 17:11:22 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/04/29 12:04:51 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-# include <inttypes.h>
 # include <string.h>
+# include <inttypes.h>
 
 /*
 ** Binary flags for printf flags

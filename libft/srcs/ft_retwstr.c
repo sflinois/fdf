@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 15:57:11 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/18 17:29:23 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/04/19 10:39:58 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ char	*ft_retwstr(wchar_t *wstr)
 	while (*wstr)
 	{
 		tmp = ret;
-		tmp2 = ft_retwchar(*wstr);
+		if (!(tmp2 = ft_retwchar(*wstr)))
+		{
+			free(tmp);
+			return (NULL);
+		}
 		ret = ft_strjoin(tmp, tmp2);
 		free(tmp);
 		free(tmp2);
