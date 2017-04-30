@@ -6,7 +6,7 @@
 #    By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/10 11:48:48 by sflinois          #+#    #+#              #
-#    Updated: 2017/04/29 16:05:00 by sflinois         ###   ########.fr        #
+#    Updated: 2017/04/29 17:25:57 by sflinois         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ SRC_NAME = ft_btree_create_node.c ft_btree_apply_prefix.c \
 		ft_itoa_base.c ft_digit_to_char.c \
 		ft_imttoa.c ft_imttoa_base.c get_next_line.c \
 		ft_retwchar.c ft_retwstr.c ft_retnwstr.c \
-		ft_mtxnew.c
+		ft_mtxnew.c ft_mtxmult.c
 		
 S_PRINTF_PATH = $(SRC_PATH)/printf
 S_PRINTF_NAME = ft_printf.c fct_printf_type_args.c fct_expr.c \
