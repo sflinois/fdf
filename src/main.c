@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 08:44:49 by sflinois          #+#    #+#             */
-/*   Updated: 2017/04/19 14:15:10 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/04/30 18:58:24 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int		end_prog(int keycode, void *param)
 
 int		main(int argc, char **argv)
 {
-	void		*mlx;
-	void		*win;
 	t_struct	s;
 	int			ret;
 
@@ -39,26 +37,22 @@ int		main(int argc, char **argv)
 		return (1);
 	}
 	ret = pars_args(argv, &s);
-	if (ret == -1)
+	if (ret < 0 )
 	{
-		ft_printf("No file %s\n", argv[1]);
-		return (1);
-	}
-	if (ret == -2)
-	{
-		ft_printf("No data found.\n");
-		return (1);
-	}
-	if (ret == -3)
-	{
-		ft_printf("Found wrong line length. Exiting.\n");
+		if (ret == -1)
+			ft_printf("No file %s\n", argv[1]);
+		if (ret == -2)
+			ft_printf("No data found.\n");
+		if (ret == -3)
+			ft_printf("Found wrong line length. Exiting.\n");
 		return (1);
 	}
 	apply_proj(&s);
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, s.w_maxx, s.w_maxy, "fdf");
-	draw_map(mlx, win, &s);
-	mlx_key_hook(win, end_prog, 0);
-	mlx_loop(mlx);
+	s.mlx = mlx_init();
+	ft_printf("Test : %d %d", s.w_maxx, s.w_maxy);
+	s.win = mlx_new_window(s.mlx, s.w_maxx, s.w_maxy, "fdf");
+	draw_map(&s);
+	mlx_key_hook(s.win, end_prog, 0);
+	mlx_loop(s.mlx);
 	return (0);
 }

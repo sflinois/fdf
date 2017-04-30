@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 11:45:32 by sflinois          #+#    #+#             */
-/*   Updated: 2017/04/29 16:13:29 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/04/30 18:41:36 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	apply_proj(t_struct *s)
 	int		y;
 	float	calc_z;
 
-	s->w_maxx = 1400;
-	s->w_maxy = 800;
+	s->w_maxx = 1200;
+	s->w_maxy = 500;
 	p.max_heigth = 50; //50
 	p.tile_wid = 80; //80
 	p.tile_len = 30; //30
