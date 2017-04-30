@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 08:44:49 by sflinois          #+#    #+#             */
-/*   Updated: 2017/04/30 18:58:24 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/04/30 19:36:09 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,18 @@
 #include "../include/fdf.h"
 #include "../libft/includes/libft.h"
 
-int		end_prog(int keycode, void *param)
+int		gere_key_event(int keycode, void *param)
 {
-	param = NULL;
+	t_struct	*s;
+
+	s = (t_struct*)param;
 	if (keycode == 53)
 		exit(0);
+	if (keycode == 76)
+	{
+		s->img.opp++;
+		draw_map(s);
+	}
 	return (0);
 }
 
@@ -52,7 +59,7 @@ int		main(int argc, char **argv)
 	ft_printf("Test : %d %d", s.w_maxx, s.w_maxy);
 	s.win = mlx_new_window(s.mlx, s.w_maxx, s.w_maxy, "fdf");
 	draw_map(&s);
-	mlx_key_hook(s.win, end_prog, 0);
+	mlx_key_hook(s.win, gere_key_event, &s);
 	mlx_loop(s.mlx);
 	return (0);
 }
