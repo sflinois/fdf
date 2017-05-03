@@ -94,9 +94,10 @@ int		insert_in_map(int fd, t_map *map)
 				i++;
 			if (str[i])
 			{
-				map->p[y][x].x = x;
-				map->p[y][x].y = y;
-				map->p[y][x].z = ft_atoi(str + i);
+				map->p[y][x].v[0] = x;
+				map->p[y][x].v[1] = y;
+				map->p[y][x].v[2] = ft_atoi(str + i);
+				map->p[y][x].v[3] = 1;
 			}
 			while (str[i] && str[i] != ' ' && str[i] != '\t')
 				i++;
@@ -126,12 +127,13 @@ int		pars_args(char **argv, t_struct *s)
 		return (ret);
 	close(fd);
 	i = 0;
-	s->map.p = (t_pixel**)malloc(sizeof(t_pixel*) * s->map.max_y);
+	s->map.p = (vec4**)malloc(sizeof(vec4*) * s->map.max_y);
 	while (i < s->map.max_y)
-		s->map.p[i++] = (t_pixel*)malloc(sizeof(t_pixel) * s->map.max_x);
+		s->map.p[i++] = (vec4*)malloc(sizeof(vec4) * s->map.max_x);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (-1);
 	insert_in_map(fd, &s->map);
+	s->map_s = s->map;
 	return (1);
 }

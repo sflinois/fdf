@@ -13,6 +13,8 @@
 #ifndef FDF_H
 # define FDF_H
 
+# include "../libft/includes/libft.h"
+
 typedef struct	s_pixel
 {
 	int		x;
@@ -35,7 +37,7 @@ typedef struct	s_map
 	int		max_x;
 	int		max_y;
 	int		max_z;
-	t_pixel	**p;
+	vec4		**p;
 }				t_map;
 
 typedef struct	s_proj
@@ -71,8 +73,10 @@ typedef struct	s_struct
 	int			w_maxx;
 	int			w_maxy;
 	t_image		img;
-	t_pixel		pix[2];
+	vec4		vec[2];
 	t_map		map;
+	t_map		map_s;
+	t_proj		pj;
 }				t_struct;
 
 void		draw_line(t_struct *s);

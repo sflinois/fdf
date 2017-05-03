@@ -56,7 +56,6 @@ int		main(int argc, char **argv)
 	}
 	apply_proj(&s);
 	s.mlx = mlx_init();
-	ft_printf("Test : %d %d", s.w_maxx, s.w_maxy);
 	s.win = mlx_new_window(s.mlx, s.w_maxx, s.w_maxy, "fdf");
 	draw_map(&s);
 	mlx_key_hook(s.win, gere_key_event, &s);

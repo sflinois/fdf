@@ -24,7 +24,7 @@ CPPFLAGS = -Iincludes
 
 LIBPATH = libft
 LDFLAGS = -Llibft
-LDLIBS = -lmlx -lft
+LDLIBS = -lft libmlx.a 
 FRAM = -framework OpenGL -framework AppKit
 
 NAME = fdf

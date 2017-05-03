@@ -13,24 +13,20 @@
 #include "../includes/libft.h"
 #include <stdlib.h>
 
-int		**ft_mtx4_multmtx(int **a, int **b)
+mtx4		ft_mtx4_multmtx(mtx4 a, mtx4 b)
 {
-	int		**ret;
+	mtx4		ret;
 	int		y;
 	int		x;
 
 	y = 0;
-	if ((ret = (int**)malloc(sizeof(int*) * (4))))
-		return (NULL);
 	while (y < 4)
 	{
-		if ((ret[y] = (int*)malloc(sizeof(int) * (4))))
-			return (NULL);
 		x = 0;
 		while (x < 4)
 		{
-			ret[y][x] = (a[y][0] * b[0][x]) + (a[y][1] * b[1][x])
-				+ (a[y][2] * b[2][x]) + (a[y][3] * b[3][x]);
+			ret.m[y][x] = (a.m[y][0] * b.m[0][x]) + (a.m[y][1] * b.m[1][x])
+				+ (a.m[y][2] * b.m[2][x]) + (a.m[y][3] * b.m[3][x]);
 			x++;
 		}
 		y++;
@@ -38,42 +34,34 @@ int		**ft_mtx4_multmtx(int **a, int **b)
 	return (ret);
 }
 
-int		**ft_mtx4_multvec(int **m, int **v)
+vec4		ft_mtx4_multvec(mtx4 m, vec4 v)
 {
-	int		**ret;
+	vec4		ret;
 	int		y;
 
 	y = 0;
-	if ((ret = (int**)malloc(sizeof(int*) * (4))))
-		return (NULL);
 	while (y < 4)
 	{
-		if ((ret[y] = (int*)malloc(sizeof(int))))
-			return (NULL);
-		ret[y][0] = (m[y][0] * v[0][0]) + (m[y][1] * v[1][0])
-			+ (m[y][2] * v[2][0]) + (m[y][3] * v[3][0]);
+		ret.v[y] = (m.m[y][0] * v.v[0]) + (m.m[y][1] * v.v[1])
+			+ (m.m[y][2] * v.v[2]) + (m.m[y][3] * v.v[3]);
 		y++;
 	}
 	return (ret);
 }
 
-int		**ft_mtx4_multnb(int i, int **m)
+mtx4		ft_mtx4_multnb(int i, mtx4 m)
 {
-	int		**ret;
+	mtx4		ret;
 	int		y;
 	int		x;
 
 	y = 0;
-	if ((ret = (int**)malloc(sizeof(int*) * (4))))
-		return (NULL);
 	while (y < 4)
 	{
-		if ((ret[y] = (int*)malloc(sizeof(int) * (4))))
-			return (NULL);
 		x = 0;
 		while (x < 4)
 		{
-			ret[y][x] = m[y][x] * i;
+			ret.m[y][x] = m.m[y][x] * i;
 			x++;
 		}
 		y++;

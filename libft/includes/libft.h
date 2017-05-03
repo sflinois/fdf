@@ -40,6 +40,16 @@ typedef struct		s_matrix
 	int				**m;
 }					t_matrix;
 
+typedef struct		s_mtx4
+{
+	int				m[4][4];
+}			mtx4;
+
+typedef struct		s_vec4
+{
+	int				v[4];
+}			vec4;
+
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
 int					ft_isalpha(int c);
@@ -132,8 +142,8 @@ int					ft_printf(const char *format, ...);
 t_matrix			*ft_mtxnew(int nb_rows, int nb_cols, int **tab);
 t_matrix			*ft_mtxmult(t_matrix *a, t_matrix *b);
 t_matrix			*ft_mtxmultint(int a, t_matrix *b);
-int					**ft_mtx4_multmtx(int **a, int **b);
-int					**ft_mtx4_multvec(int **m, int **v);
-int					**ft_mtx4_multnb(int i, int **m);
+mtx4				ft_mtx4_multmtx(mtx4 a, mtx4 b);
+vec4				ft_mtx4_multvec(mtx4 m, vec4 v);
+mtx4				ft_mtx4_multnb(int i, mtx4 m);
 
 #endif

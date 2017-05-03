@@ -30,55 +30,91 @@ void	adapt_win(t_struct *s, t_proj *p)
 		x = 0;
 		while (x < s->map.max_x)
 		{
-			s->map.p[y][x].x -= cst_x;
-			s->map.p[y][x].y -= cst_y;
+			s->map.p[y][x].v[0] -= cst_x;
+			s->map.p[y][x].v[1] -= cst_y;
 			x++;
 		}
 		y++;
 	}
 }
 
+int		adapt_size(t_struct *s, t_proj *p, t_map map)
+{
+	if (p->max_len == 0 && s->map.max_x > 0)
+		return (0);
+	if (p->max_len - p->min_len > s->w_maxx || p->max_wid - p->min_wid > s->w_maxy)
+	{
+		if (p->max_heigth > s->map.max_z + 1)
+			p->max_heigth -= 1;
+		if (p->tile_wid > 8)
+			p->tile_wid -= 2;
+		else
+			return (1);
+		if (p->tile_len > 4)
+			p->tile_len -= 1;
+		else
+			return(1);
+		s->map = map;
+		p->half_tw = p->tile_wid / 2;
+		p->half_tl = p->tile_len / 2;
+		return (0);
+	}
+	return (1);
+}
+
 void	apply_proj(t_struct *s)
 {
-	t_proj	p;
 	int		x;
 	int		y;
 	float	calc_z;
 
-	s->w_maxx = 1200;
-	s->w_maxy = 500;
-	p.max_heigth = 50; //50
-	p.tile_wid = 80; //80
-	p.tile_len = 30; //30
-	p.half_tw = p.tile_wid / 2;
-	p.half_tl = p.tile_len / 2;
-	p.max_len = 0;
-	p.min_len = 0;
-	p.max_wid = 0;
-	p.min_wid = 0;
-	p.space = 20;
-	y = 0;
-	while (y < s->map.max_y)
+	s->w_maxx = 1500;
+	s->w_maxy = 700;
+	s->pj.max_heigth = 10; //50
+	s->pj.tile_wid = 80; //80
+	s->pj.tile_len = 40; //30
+	s->pj.half_tw = s->pj.tile_wid / 2;
+	s->pj.half_tl = s->pj.tile_len / 2;
+	s->pj.max_len = 0;
+	s->pj.min_len = 0;
+	s->pj.max_wid = 0;
+	s->pj.min_wid = 0;
+	s->pj.space = 20;
+	while (!adapt_size(s, &(s->pj), s->map_s))
 	{
-		x = 0;
-		while (x < s->map.max_x)
+		y = 0;
+		while (y < s->map.max_y)
 		{
-			calc_z = s->map.max_z != 0 ?
-				(s->map.p[y][x].z / s->map.max_z) * p.max_heigth
-				: (s->map.p[y][x].z) * p.max_heigth ;
-			s->map.p[y][x].x = (x - y) * p.half_tw;
-			s->map.p[y][x].y = (x + y) * p.half_tl - calc_z;
-			if (s->map.p[y][x].x > p.max_len)
-				p.max_len = s->map.p[y][x].x;
-			if (s->map.p[y][x].x < p.min_len)
-				p.min_len = s->map.p[y][x].x;
-			if (s->map.p[y][x].y > p.max_wid)
-				p.max_wid = s->map.p[y][x].y;
-			if (s->map.p[y][x].y < p.min_wid)
-				p.min_wid = s->map.p[y][x].y;
-			x++;
+			x = 0;
+			while (x < s->map.max_x)
+			{
+				if (s->map.p[y][x].v[0] == s->pj.max_len)
+					s->pj.max_len = s->pj.min_len;
+				if (s->map.p[y][x].v[0] == s->pj.min_len)
+					s->pj.min_len = s->pj.max_len;
+				if (s->map.p[y][x].v[1] == s->pj.max_wid)
+					s->pj.max_wid = s->pj.min_wid;
+				if (s->map.p[y][x].v[1] == s->pj.min_wid)
+					s->pj.min_wid = s->pj.max_wid;
+				calc_z = s->map.max_z != 0 ?
+					(s->map.p[y][x].v[2]) * s->pj.max_heigth
+					: (s->map.p[y][x].v[2]) * s->pj.max_heigth ;
+				//modif Y en le multipliant pour changer l'angle ?
+				s->map.p[y][x].v[0] = (x - y) * s->pj.half_tw;
+				s->map.p[y][x].v[1] = (x + y) * s->pj.half_tl - calc_z;
+				if (s->map.p[y][x].v[0] > s->pj.max_len)
+					s->pj.max_len = s->map.p[y][x].v[0];
+				if (s->map.p[y][x].v[0] < s->pj.min_len)
+					s->pj.min_len = s->map.p[y][x].v[0];
+				if (s->map.p[y][x].v[1] > s->pj.max_wid)
+					s->pj.max_wid = s->map.p[y][x].v[1];
+				if (s->map.p[y][x].v[1] < s->pj.min_wid)
+					s->pj.min_wid = s->map.p[y][x].v[1];
+				x++;
+			}
+			y++;
 		}
-		y++;
 	}
-	adapt_win(s, &p);
+	//	adapt_win a modif, rédiut les cases plutot que la fenetre 
+	adapt_win(s, &(s->pj));
 }
