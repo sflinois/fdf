@@ -37,6 +37,8 @@ typedef struct	s_map
 	int		max_x;
 	int		max_y;
 	int		max_z;
+	int		mv_x;
+	int		mv_y;
 	vec4		**p;
 }				t_map;
 
@@ -81,6 +83,18 @@ typedef struct	s_struct
 
 void		draw_line(t_struct *s);
 void		draw_map(t_struct *s);
-int			pars_args(char **argv, t_struct *s);
+int		pars_args(char **argv, t_struct *s);
+void		project_map(t_struct *s);
 void		apply_proj(t_struct *s);
+void		adapt_win(t_struct *s, t_proj *p);
+void		center_map(t_struct *s);
+void		reset_img(t_struct *s);
+void		move_left(t_struct *s);
+void		move_right(t_struct *s);
+void		move_down(t_struct *s);
+void		move_up(t_struct *s);
+void		zoom_in(t_struct *s);
+void		zoom_out(t_struct *s);
+
 #endif
+

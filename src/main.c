@@ -22,6 +22,8 @@ int		gere_key_event(int keycode, void *param)
 	t_struct	*s;
 
 	s = (t_struct*)param;
+	ft_printf("Keycode : %d\n", keycode);
+	//esc
 	if (keycode == 53)
 		exit(0);
 	if (keycode == 76)
@@ -29,6 +31,24 @@ int		gere_key_event(int keycode, void *param)
 		s->img.opp++;
 		draw_map(s);
 	}
+	//arrow left
+	if (keycode == 123)
+		move_left(s);
+	//arrow right
+	if (keycode == 124)
+		move_right(s);
+	//arrow down
+	if (keycode == 125)
+		move_down(s);
+	//arrow up
+	if (keycode == 126)
+		move_up(s);
+	//i
+	if (keycode == 34)
+		zoom_in(s);
+	//o
+	if (keycode == 31)
+		zoom_out(s);
 	return (0);
 }
 

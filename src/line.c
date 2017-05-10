@@ -94,13 +94,21 @@ void		draw_map(t_struct *s)
 			if (x + 1 < s->map.max_x)
 			{
 				s->vec[0] = s->map.p[y][x];
+				s->vec[0].v[0] += s->map.mv_x;
+				s->vec[0].v[1] += s->map.mv_y;
 				s->vec[1] = s->map.p[y][x + 1];
+				s->vec[1].v[0] += s->map.mv_x;
+				s->vec[1].v[1] += s->map.mv_y;
 				draw_line(s);
 			}
 			if (y + 1 < s->map.max_y)
 			{
 				s->vec[0] = s->map.p[y][x];
+				s->vec[0].v[0] += s->map.mv_x;
+				s->vec[0].v[1] += s->map.mv_y;
 				s->vec[1] = s->map.p[y + 1][x];
+				s->vec[1].v[0] += s->map.mv_x;
+				s->vec[1].v[1] += s->map.mv_y;
 				draw_line(s);
 			}
 			x++;

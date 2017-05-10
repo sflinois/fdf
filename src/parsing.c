@@ -118,6 +118,8 @@ int		pars_args(char **argv, t_struct *s)
 	s->map.max_x = 0;
 	s->map.max_y = 0;
 	s->map.max_z = 0;
+	s->map.mv_x = 0;
+	s->map.mv_y = 0;
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (-1);

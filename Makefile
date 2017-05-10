@@ -18,7 +18,7 @@ CCGREEN = "\033[0;32m"
 CCEND = "\033[0m"
 
 SRC_PATH = src
-SRC_NAME = main.c line.c parsing.c projection.c
+SRC_NAME = main.c line.c parsing.c projection.c key_event_fct.c key_event_fct2.c
 OBJ_PATH = objs
 CPPFLAGS = -Iincludes
 
