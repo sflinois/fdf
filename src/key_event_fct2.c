@@ -27,7 +27,7 @@ void	zoom_out(t_struct *s)
 		s->pj.half_tw = s->pj.tile_wid / 2;
 		s->pj.half_tl = s->pj.tile_len / 2;
 	}
-	ft_printf("max_heigth : %d tile_len : %d tile_wid : %d", s->pj.max_heigth, s->pj.tile_len, s->pj.tile_wid);
+//	ft_printf("max_heigth : %d tile_len : %d tile_wid : %d", s->pj.max_heigth, s->pj.tile_len, s->pj.tile_wid);
 	project_map(s);
 	center_map(s);
 	reset_img(s);

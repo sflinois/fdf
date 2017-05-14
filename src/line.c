@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:50:45 by sflinois          #+#    #+#             */
-/*   Updated: 2017/04/30 19:36:32 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/05/14 17:06:45 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,15 @@ void		init_line(t_line *line, vec4 a, vec4 b)
 void		put_pixel(t_struct *s, int x, int y)
 {
 	int	i;
-
+	
+	s->img.color = 0x00000B00;
+	if (s->vec[0].v[2] < 0)
+		s->img.color = 0x00000FF0;
+	if (s->vec[0].v[2]  != s->vec[1].v[2])
+		s->img.color = 0x0000B650;
+	if (s->vec[0].v[2] != 0 && s->vec[0].v[2] == s->vec[1].v[2])
+		s->img.color = 0x0000F650;
+	s->img.color_v = mlx_get_color_value(s->mlx, s->img.color);
 	i = s->img.color_v;
 	*(s->img.data + y * s->img.sizeline + s->img.opp * x) = i;
 	if (s->img.opp > 1)
@@ -82,7 +90,7 @@ void		draw_map(t_struct *s)
 	s->img.ptr = mlx_new_image(s->mlx, s->w_maxx, s->w_maxy);
 	s->img.data = mlx_get_data_addr(s->img.ptr, &(s->img.bpp),
 			&(s->img.sizeline), &(s->img.endian));
-	s->img.color = 0x0000FFFF ;
+	s->img.color = 0x00000FF0;
 	s->img.color_v = mlx_get_color_value(s->mlx, s->img.color);
 	s->img.opp = s->img.bpp / 8;
 	y = 0;

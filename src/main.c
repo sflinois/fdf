@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 08:44:49 by sflinois          #+#    #+#             */
-/*   Updated: 2017/04/30 19:36:09 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/05/14 17:06:57 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		gere_key_event(int keycode, void *param)
 	t_struct	*s;
 
 	s = (t_struct*)param;
-	ft_printf("Keycode : %d\n", keycode);
+//	ft_printf("Keycode : %d\n", keycode);
 	//esc
 	if (keycode == 53)
 		exit(0);
