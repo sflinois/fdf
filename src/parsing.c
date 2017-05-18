@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 16:06:08 by sflinois          #+#    #+#             */
-/*   Updated: 2017/03/29 13:25:54 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/05/15 17:00:33 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,6 @@ int		pars_args(char **argv, t_struct *s)
 	int		i;
 	int		ret;
 
-	s->map.max_x = 0;
-	s->map.max_y = 0;
-	s->map.max_z = 0;
-	s->map.mv_x = 0;
-	s->map.mv_y = 0;
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (-1);
@@ -129,9 +124,9 @@ int		pars_args(char **argv, t_struct *s)
 		return (ret);
 	close(fd);
 	i = 0;
-	s->map.p = (vec4**)malloc(sizeof(vec4*) * s->map.max_y);
+	s->map.p = (t_vec4**)malloc(sizeof(t_vec4*) * s->map.max_y);
 	while (i < s->map.max_y)
-		s->map.p[i++] = (vec4*)malloc(sizeof(vec4) * s->map.max_x);
+		s->map.p[i++] = (t_vec4*)malloc(sizeof(t_vec4) * s->map.max_x);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (-1);

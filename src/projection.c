@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 11:45:32 by sflinois          #+#    #+#             */
-/*   Updated: 2017/05/14 17:03:36 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/05/15 16:57:12 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,15 @@
 
 void	center_map(t_struct *s)
 {
-	int	mid_x;
-	int	mid_y;
 	int	modif_x;
 	int	modif_y;
 	int	x;
 	int	y;
 
-	mid_x = s->w_maxx / 2;
-	mid_y = s->w_maxy / 2;
 	x = s->map_s.max_x / 2;
 	y = s->map_s.max_y / 2;
-	modif_x = mid_x - s->map.p[y][x].v[0];
-	modif_y = mid_y - s->map.p[y][x].v[1];
+	modif_x = s->w_maxx / 2 - s->map.p[y][x].v[0];
+	modif_y = s->w_maxy / 2 - s->map.p[y][x].v[1];
 	y = 0;
 	while (y < s->map.max_y)
 	{
@@ -41,6 +37,7 @@ void	center_map(t_struct *s)
 		y++;
 	}
 }
+
 void	adapt_win(t_struct *s, t_proj *p)
 {
 	int		x;
@@ -52,6 +49,16 @@ void	adapt_win(t_struct *s, t_proj *p)
 	cst_y = p->min_wid - p->space;
 	s->w_maxx = p->max_len - cst_x + p->space;
 	s->w_maxy = p->max_wid - cst_y + p->space;
+	if (s->w_maxx > 2300)
+	{
+		cst_x += (s->w_maxx - 2300) / 2;
+		s->w_maxx = 2300;
+	}
+	if (s->w_maxy > 1200)
+	{
+		cst_y += (s->w_maxy - 1200) / 2;
+		s->w_maxy = 1200;
+	}
 	y = 0;
 	while (y < s->map.max_y)
 	{
@@ -70,18 +77,18 @@ int		adapt_size(t_struct *s, t_proj *p, t_map map)
 {
 	if (p->max_len == 0 && s->map.max_x > 0)
 		return (0);
-	if (p->max_len - p->min_len > s->w_maxx || p->max_wid - p->min_wid > s->w_maxy)
+	if (p->max_len - p->min_len > s->w_maxx ||
+			p->max_wid - p->min_wid > s->w_maxy)
 	{
 		if (p->max_heigth > s->map.max_z + 1)
 			p->max_heigth -= 1;
-		if (p->tile_wid > 8)
+		if (p->tile_wid > 8 && p->tile_len > 4)
+		{
 			p->tile_wid -= 2;
+			p->tile_len -= 1;
+		}
 		else
 			return (1);
-		if (p->tile_len > 4)
-			p->tile_len -= 1;
-		else
-			return(1);
 		s->map = map;
 		p->half_tw = p->tile_wid / 2;
 		p->half_tl = p->tile_len / 2;
@@ -112,8 +119,7 @@ void	project_map(t_struct *s)
 				s->pj.min_wid = s->pj.max_wid;
 			calc_z = s->map.max_z != 0 ?
 				(s->map.p[y][x].v[2]) * s->pj.max_heigth
-				: (s->map.p[y][x].v[2]) * s->pj.max_heigth ;
-			//modif Y en le multipliant pour changer l'angle ?
+				: (s->map.p[y][x].v[2]) * s->pj.max_heigth;
 			s->map.p[y][x].v[0] = (x - y) * s->pj.half_tw;
 			s->map.p[y][x].v[1] = (x + y) * s->pj.half_tl - calc_z;
 			if (s->map.p[y][x].v[0] > s->pj.max_len)
@@ -129,14 +135,14 @@ void	project_map(t_struct *s)
 		y++;
 	}
 }
+
 void	apply_proj(t_struct *s)
 {
-
 	s->w_maxx = 1500;
 	s->w_maxy = 700;
-	s->pj.max_heigth = 1; //50
-	s->pj.tile_wid = 80; //80
-	s->pj.tile_len = 40; //30
+	s->pj.max_heigth = s->map.max_z > 35 ? 1 : 10;
+	s->pj.tile_wid = 80;
+	s->pj.tile_len = 40;
 	s->pj.half_tw = s->pj.tile_wid / 2;
 	s->pj.half_tl = s->pj.tile_len / 2;
 	s->pj.max_len = 0;
@@ -146,6 +152,5 @@ void	apply_proj(t_struct *s)
 	s->pj.space = 20;
 	while (!adapt_size(s, &(s->pj), s->map_s))
 		project_map(s);
-	//adapt_win a modif, rédiut les cases plutot que la fenetre 
 	adapt_win(s, &(s->pj));
 }

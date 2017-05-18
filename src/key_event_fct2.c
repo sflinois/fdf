@@ -1,20 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   key_event_fct2.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/15 16:25:20 by sflinois          #+#    #+#             */
+/*   Updated: 2017/05/15 16:25:46 by sflinois         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/fdf.h"
 #include "../include/mlx.h"
 
 void	zoom_in(t_struct *s)
 {
-	if (s->pj.max_heigth < 500 && s->pj.tile_len < 2000 && s->pj.tile_wid < 4000)
+	if (s->pj.max_heigth * s->map.max_z < 5000 && s->pj.tile_len * s->map.max_x
+			< 20000 && s->pj.tile_wid * s->map.max_y < 40000)
 	{
 		s->pj.max_heigth *= 2;
 		s->pj.tile_len *= 2;
 		s->pj.tile_wid *= 2;
 		s->pj.half_tw = s->pj.tile_wid / 2;
 		s->pj.half_tl = s->pj.tile_len / 2;
+		project_map(s);
+		center_map(s);
+		reset_img(s);
+		draw_map(s);
 	}
-	project_map(s);
-	center_map(s);
-	reset_img(s);
-	draw_map(s);
 }
 
 void	zoom_out(t_struct *s)
@@ -26,10 +39,9 @@ void	zoom_out(t_struct *s)
 		s->pj.tile_wid /= 2;
 		s->pj.half_tw = s->pj.tile_wid / 2;
 		s->pj.half_tl = s->pj.tile_len / 2;
+		project_map(s);
+		center_map(s);
+		reset_img(s);
+		draw_map(s);
 	}
-//	ft_printf("max_heigth : %d tile_len : %d tile_wid : %d", s->pj.max_heigth, s->pj.tile_len, s->pj.tile_wid);
-	project_map(s);
-	center_map(s);
-	reset_img(s);
-	draw_map(s);
 }

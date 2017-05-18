@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/30 16:17:10 by sflinois          #+#    #+#             */
-/*   Updated: 2017/04/30 16:40:11 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/05/15 16:22:36 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 mtx4		ft_mtx4_multmtx(mtx4 a, mtx4 b)
 {
-	mtx4		ret;
+	mtx4	ret;
 	int		y;
 	int		x;
 
@@ -36,7 +36,7 @@ mtx4		ft_mtx4_multmtx(mtx4 a, mtx4 b)
 
 vec4		ft_mtx4_multvec(mtx4 m, vec4 v)
 {
-	vec4		ret;
+	vec4	ret;
 	int		y;
 
 	y = 0;
@@ -51,7 +51,7 @@ vec4		ft_mtx4_multvec(mtx4 m, vec4 v)
 
 mtx4		ft_mtx4_multnb(int i, mtx4 m)
 {
-	mtx4		ret;
+	mtx4	ret;
 	int		y;
 	int		x;
 
@@ -68,4 +68,3 @@ mtx4		ft_mtx4_multnb(int i, mtx4 m)
 	}
 	return (ret);
 }
-
