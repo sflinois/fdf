@@ -6,13 +6,21 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 16:59:39 by sflinois          #+#    #+#             */
-/*   Updated: 2017/05/15 17:03:06 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/06/01 17:37:09 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 #include "../libft/includes/libft.h"
 #include <stdlib.h>
+
+void	init_vec(t_vec4 *v, int x, int y, int z)
+{
+	(*v)[0] = x;
+	(*v)[1] = y;
+	(*v)[2] = z;
+	(*v)[3] = 1;
+}
 
 int		insert_in_map(int fd, t_map *map)
 {
@@ -31,12 +39,7 @@ int		insert_in_map(int fd, t_map *map)
 			while (str[i] == ' ' || str[i] == '\t')
 				i++;
 			if (str[i])
-			{
-				map->p[y][x].v[0] = x;
-				map->p[y][x].v[1] = y;
-				map->p[y][x].v[2] = ft_atoi(str + i);
-				map->p[y][x].v[3] = 1;
-			}
+				init_vec(&(map->p[y][x].v), x, y, ft_atoi(str + i));
 			while (str[i] && str[i] != ' ' && str[i] != '\t')
 				i++;
 			x++;

@@ -6,7 +6,7 @@
 #    By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/10 11:48:48 by sflinois          #+#    #+#              #
-#    Updated: 2017/03/29 12:04:12 by sflinois         ###   ########.fr        #
+#    Updated: 2017/06/01 14:59:57 by sflinois         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ CPPFLAGS = -Iincludes
 
 LIBPATH = libft
 LDFLAGS = -Llibft
-LDLIBS = -lft libmlx.a 
+LDLIBS = -lft libmlx.a
 FRAM = -framework OpenGL -framework AppKit
 
 NAME = fdf

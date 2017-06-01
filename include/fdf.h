@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 12:20:02 by sflinois          #+#    #+#             */
-/*   Updated: 2017/05/15 17:00:25 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/06/01 15:13:07 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct	s_struct
 void			draw_line(t_struct *s);
 void			draw_map(t_struct *s);
 int				pars_args(char **argv, t_struct *s);
+void			init_vec(t_vec4 *v, int x, int y, int z);
 int				insert_in_map(int fd, t_map *map);
 void			project_map(t_struct *s);
 void			apply_proj(t_struct *s);

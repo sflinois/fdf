@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 16:06:08 by sflinois          #+#    #+#             */
-/*   Updated: 2017/05/15 17:00:33 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/06/01 17:36:18 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,7 @@ int		insert_in_map(int fd, t_map *map)
 			while (str[i] == ' ' || str[i] == '\t')
 				i++;
 			if (str[i])
-			{
-				map->p[y][x].v[0] = x;
-				map->p[y][x].v[1] = y;
-				map->p[y][x].v[2] = ft_atoi(str + i);
-				map->p[y][x].v[3] = 1;
-			}
+				init_vec(&(map->p[y][x]), x, y, ft_atoi(str + i));
 			while (str[i] && str[i] != ' ' && str[i] != '\t')
 				i++;
 			x++;
