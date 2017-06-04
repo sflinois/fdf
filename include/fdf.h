@@ -74,6 +74,7 @@ typedef struct	s_struct
 	void		*win;
 	int			w_maxx;
 	int			w_maxy;
+	short			enable_color;
 	t_image		img;
 	t_vec4		vec[2];
 	t_map		map;
@@ -83,9 +84,8 @@ typedef struct	s_struct
 
 void			draw_line(t_struct *s);
 void			draw_map(t_struct *s);
-int				pars_args(char **argv, t_struct *s);
-void			init_vec(t_vec4 *v, int x, int y, int z);
-int				insert_in_map(int fd, t_map *map);
+int			pars_args(char **argv, t_struct *s);
+int			insert_in_map(int fd, t_map *map);
 void			project_map(t_struct *s);
 void			apply_proj(t_struct *s);
 void			adapt_win(t_struct *s, t_proj *p);
@@ -97,5 +97,6 @@ void			move_down(t_struct *s);
 void			move_up(t_struct *s);
 void			zoom_in(t_struct *s);
 void			zoom_out(t_struct *s);
+void			enable_colors(t_struct *s);
 
 #endif

@@ -45,3 +45,10 @@ void	zoom_out(t_struct *s)
 		draw_map(s);
 	}
 }
+
+void	enable_colors(t_struct *s)
+{
+	s->enable_color = s->enable_color ? 0 : 1;
+	reset_img(s);
+	draw_map(s);
+}

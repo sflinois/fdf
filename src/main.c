@@ -24,6 +24,7 @@ void	init_struct(t_struct *s)
 	s->map.max_z = 0;
 	s->map.mv_x = 0;
 	s->map.mv_y = 0;
+	s->enable_color = 0;
 }
 
 int		gere_key_event(int keycode, void *param)
@@ -46,6 +47,8 @@ int		gere_key_event(int keycode, void *param)
 		zoom_in(s);
 	if (keycode == 78)
 		zoom_out(s);
+	if (keycode == 8)
+		enable_colors(s);
 	return (0);
 }
 
@@ -55,7 +58,9 @@ int		main(int argc, char **argv)
 	int			ret;
 
 	init_struct(&s);
+	ft_printf("test1");
 	ret = argc != 2 ? -4 : pars_args(argv, &s);
+	ft_printf("test1");
 	if (ret < 0)
 	{
 		if (ret == -1)
@@ -73,7 +78,7 @@ int		main(int argc, char **argv)
 	s.win = mlx_new_window(s.mlx, s.w_maxx, s.w_maxy, "fdf");
 	draw_map(&s);
 	mlx_do_key_autorepeaton(s.mlx);
-	mlx_key_hook(s.win, gere_key_event, &s);
+	mlx_hook(s.win, 2, 0L, gere_key_event, &s);
 	mlx_loop(s.mlx);
 	return (0);
 }

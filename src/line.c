@@ -29,30 +29,32 @@ void		put_pixel(t_struct *s, int x, int y)
 {
 	int	i;
 
-	s->img.color = 0x0000FFF0;
-	if (s->vec[0].v[2] < 0)
-		s->img.color = 0x00000FF0;
+	s->img.color = 0xFF0000;
+	if (!s->enable_color)
+		s->img.color = 0xFFFFFF;
+	else if (s->vec[0].v[2] < 0)
+		s->img.color = 0x00FFFF;
 	else if (s->vec[0].v[2] == 0 && s->vec[1].v[2] == 0)
-		s->img.color = 0x00000B00;
+		s->img.color = 0x00FF00;
 	else if (s->vec[0].v[2] < s->map.max_z / 6
 			&& s->vec[1].v[2] < s->map.max_z / 6)
-		s->img.color = 0x00008B00;
+		s->img.color = 0x00BB00;
 	else if (s->vec[0].v[2] != s->vec[1].v[2])
-		s->img.color = 0x0000B650;
+		s->img.color = 0xFFFF00;
 	else if (s->vec[0].v[2] != 0 && s->vec[0].v[2] == s->vec[1].v[2])
-		s->img.color = 0x0000F650;
+		s->img.color = 0xFFBB00;
 	s->img.color_v = mlx_get_color_value(s->mlx, s->img.color);
 	i = s->img.color_v;
-	*(s->img.data + y * s->img.sizeline + s->img.opp * x) = i;
+	s->img.data[y * s->img.sizeline + s->img.opp * x] = i;
 	if (s->img.opp > 1)
 	{
-		i = i >> 4;
-		*(s->img.data + y * s->img.sizeline + s->img.opp * x + 1) = i;
+		i = i >> 8;
+		s->img.data[y * s->img.sizeline + s->img.opp * x + 1] = i;
 	}
 	if (s->img.opp > 2)
 	{
-		i = i >> 4;
-		*(s->img.data + y * s->img.sizeline + s->img.opp * x + 2) = i;
+		i = i >> 8;
+		s->img.data[y * s->img.sizeline + s->img.opp * x + 2] = i;
 	}
 }
 
@@ -126,4 +128,7 @@ void		draw_map(t_struct *s)
 		y++;
 	}
 	mlx_put_image_to_window(s->mlx, s->win, s->img.ptr, 0, 0);
+	mlx_string_put(s->mlx, s->win, 10, 10, 0XFFFFFF, "MOVEMENTS: ARROWS KEYS");
+	mlx_string_put(s->mlx, s->win, 10, 30, 0XFFFFFF, "ZOOM: + & -");
+	mlx_string_put(s->mlx, s->win, 10, 50, 0XFFFFFF, "COLORS: C");
 }

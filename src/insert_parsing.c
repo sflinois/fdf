@@ -16,10 +16,10 @@
 
 void	init_vec(t_vec4 *v, int x, int y, int z)
 {
-	(*v)[0] = x;
-	(*v)[1] = y;
-	(*v)[2] = z;
-	(*v)[3] = 1;
+	v->v[0] = x;
+	v->v[1] = y;
+	v->v[2] = z;
+	v->v[3] = 1;
 }
 
 int		insert_in_map(int fd, t_map *map)
@@ -39,7 +39,7 @@ int		insert_in_map(int fd, t_map *map)
 			while (str[i] == ' ' || str[i] == '\t')
 				i++;
 			if (str[i])
-				init_vec(&(map->p[y][x].v), x, y, ft_atoi(str + i));
+				init_vec(&(map->p[y][x]), x, y, ft_atoi(str + i));
 			while (str[i] && str[i] != ' ' && str[i] != '\t')
 				i++;
 			x++;
