@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:50:45 by sflinois          #+#    #+#             */
-/*   Updated: 2017/06/05 16:40:55 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/06/05 18:53:48 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 
 void		init_line(t_line *line, t_vec4 a, t_vec4 b)
 {
-	line->dx = fabs(b.v[0] - a.v[0]);
+	line->dx = abs(b.v[0] - a.v[0]);
 	line->sx = a.v[0] < b.v[0] ? 1 : -1;
-	line->dy = fabs(b.v[1] - a.v[1]);
+	line->dy = abs(b.v[1] - a.v[1]);
 	line->sy = a.v[1] < b.v[1] ? 1 : -1;
 	line->err = (line->dx > line->dy ? line->dx : -line->dy) / 2;
 }
@@ -66,7 +66,7 @@ void		draw_line(t_struct *s)
 	if (s->vec[0].v[0] > 0 && s->vec[0].v[0] < s->w_maxx &&
 			s->vec[0].v[1] > 0 && s->vec[0].v[1] < s->w_maxy)
 		put_pixel(s, s->vec[0].v[0], s->vec[0].v[1]);
-	while ((s->vec[0].v[0] != s->vec[1].v[0]) &&
+	while ((s->vec[0].v[0] != s->vec[1].v[0]) ||
 			(s->vec[0].v[1] != s->vec[1].v[1]))
 	{
 		line.err2 = line.err;
@@ -111,7 +111,6 @@ void		draw_map(t_struct *s)
 				s->vec[1] = s->map.p[y][x + 1];
 				s->vec[1].v[0] += s->map.mv_x;
 				s->vec[1].v[1] += s->map.mv_y;
-				ft_printf("y: %d x: %d \n", y, x);
 				draw_line(s);
 			}
 			if (y + 1 < s->map.max_y)
@@ -129,7 +128,15 @@ void		draw_map(t_struct *s)
 		y++;
 	}
 	mlx_put_image_to_window(s->mlx, s->win, s->img.ptr, 0, 0);
-	mlx_string_put(s->mlx, s->win, 10, 10, 0XFFFFFF, "MOVEMENTS: ARROWS KEYS");
-	mlx_string_put(s->mlx, s->win, 10, 30, 0XFFFFFF, "ZOOM: + & -");
-	mlx_string_put(s->mlx, s->win, 10, 50, 0XFFFFFF, "COLORS: C");
+	if (s->enable_help)
+	{
+		mlx_string_put(s->mlx, s->win, 10, 10, 0XFFFFFF, "Movement: Arrow Keys");
+		mlx_string_put(s->mlx, s->win, 10, 30, 0XFFFFFF, "Zoom: +, -");
+		mlx_string_put(s->mlx, s->win, 10, 50, 0XFFFFFF, "Heigth: PageUp, PageDown");
+		mlx_string_put(s->mlx, s->win, 10, 70, 0XFFFFFF, "Colors: c");
+		mlx_string_put(s->mlx, s->win, 10, 95, 0XFFFFFF, "Press 'h' to hide.");
+	}
+	else
+		mlx_string_put(s->mlx, s->win, 5, 5, 0XFFFFFF, "Press \'h\' for help.");
+
 }

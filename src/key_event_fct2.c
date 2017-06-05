@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 16:25:20 by sflinois          #+#    #+#             */
-/*   Updated: 2017/05/15 16:25:46 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/06/05 19:45:54 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void	zoom_in(t_struct *s)
 
 void	zoom_out(t_struct *s)
 {
-	if (s->pj.max_heigth > 1 && s->pj.tile_len > 4 && s->pj.tile_wid > 8)
+	if (s->pj.tile_len > 3 && s->pj.tile_wid > 6)
 	{
-		s->pj.max_heigth /= 2;
+		s->pj.max_heigth /= s->pj.max_heigth > 1 ? 2 : 1;
 		s->pj.tile_len /= 2;
 		s->pj.tile_wid /= 2;
 		s->pj.half_tw = s->pj.tile_wid / 2;
@@ -43,6 +43,7 @@ void	zoom_out(t_struct *s)
 		center_map(s);
 		reset_img(s);
 		draw_map(s);
+		ft_printf("%d, %d\n", s->pj.tile_len, s->pj.tile_wid);
 	}
 }
 
@@ -51,4 +52,34 @@ void	enable_colors(t_struct *s)
 	s->enable_color = s->enable_color ? 0 : 1;
 	reset_img(s);
 	draw_map(s);
+}
+
+void	enable_help(t_struct *s)
+{
+	s->enable_help = s->enable_help ? 0 : 1;
+	reset_img(s);
+	draw_map(s);
+}
+
+void	add_heigth(t_struct *s)
+{
+	if (s->pj.max_heigth < 20)
+	{
+		s->pj.max_heigth++; 
+		project_map(s);
+		center_map(s);
+		reset_img(s);
+		draw_map(s);
+	}
+}
+void	sub_heigth(t_struct *s)
+{
+	if (s->pj.max_heigth > 0)
+	{
+		s->pj.max_heigth--; 
+		project_map(s);
+		center_map(s);
+		reset_img(s);
+		draw_map(s);
+	}
 }

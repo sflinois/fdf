@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 08:44:49 by sflinois          #+#    #+#             */
-/*   Updated: 2017/06/05 16:23:49 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/06/05 19:18:25 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,30 +25,33 @@ void	init_struct(t_struct *s)
 	s->map.mv_x = 0;
 	s->map.mv_y = 0;
 	s->enable_color = 0;
+	s->enable_help = 0;
 }
 
 int		gere_key_event(int keycode, void *param)
 {
-	t_struct	*s;
-
-	s = (t_struct*)param;
-	ft_printf("Keycode : %d\n", keycode);
 	if (keycode == 53)
 		exit(0);
 	if (keycode == 123)
-		move_left(s);
+		move_left((t_struct*)param);
 	if (keycode == 124)
-		move_right(s);
+		move_right((t_struct*)param);
 	if (keycode == 125)
-		move_down(s);
+		move_down((t_struct*)param);
 	if (keycode == 126)
-		move_up(s);
+		move_up((t_struct*)param);
 	if (keycode == 69)
-		zoom_in(s);
+		zoom_in((t_struct*)param);
 	if (keycode == 78)
-		zoom_out(s);
+		zoom_out((t_struct*)param);
 	if (keycode == 8)
-		enable_colors(s);
+		enable_colors((t_struct*)param);
+	if (keycode == 4)
+		enable_help((t_struct*)param);
+	if (keycode == 116)
+		add_heigth((t_struct*)param);
+	if (keycode == 121)
+		sub_heigth((t_struct*)param);
 	return (0);
 }
 

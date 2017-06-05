@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 11:45:32 by sflinois          #+#    #+#             */
-/*   Updated: 2017/06/05 16:49:30 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/06/05 17:33:38 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,8 @@ void	apply_proj(t_struct *s)
 	s->w_maxx = 1500;
 	s->w_maxy = 700;
 	s->pj.max_heigth = s->map.max_z > 35 ? 1 : 10;
-	s->pj.tile_wid = 60;
-	s->pj.tile_len = 30;
+	s->pj.tile_wid = 64;
+	s->pj.tile_len = 32;
 	s->pj.half_tw = s->pj.tile_wid / 2;
 	s->pj.half_tl = s->pj.tile_len / 2;
 	s->pj.max_len = 0;

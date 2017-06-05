@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 16:24:52 by sflinois          #+#    #+#             */
-/*   Updated: 2017/05/15 16:25:16 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/06/05 17:47:20 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,32 +21,28 @@ void	reset_img(t_struct *s)
 
 void	move_left(t_struct *s)
 {
-	if (s->map.mv_x > -1 * s->w_maxx)
-		s->map.mv_x -= 10;
+	s->map.mv_x -= 10;
 	reset_img(s);
 	draw_map(s);
 }
 
 void	move_right(t_struct *s)
 {
-	if (s->map.mv_x < s->w_maxx)
-		s->map.mv_x += 10;
+	s->map.mv_x += 10;
 	reset_img(s);
 	draw_map(s);
 }
 
 void	move_down(t_struct *s)
 {
-	if (s->map.mv_x < s->w_maxy)
-		s->map.mv_y += 10;
+	s->map.mv_y += 10;
 	reset_img(s);
 	draw_map(s);
 }
 
 void	move_up(t_struct *s)
 {
-	if (s->map.mv_x > -1 * s->w_maxy)
-		s->map.mv_y -= 10;
+	s->map.mv_y -= 10;
 	reset_img(s);
 	draw_map(s);
 }
