@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 08:44:49 by sflinois          #+#    #+#             */
-/*   Updated: 2017/05/18 17:51:41 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/06/05 16:23:49 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,7 @@ int		main(int argc, char **argv)
 	int			ret;
 
 	init_struct(&s);
-	ft_printf("test1");
 	ret = argc != 2 ? -4 : pars_args(argv, &s);
-	ft_printf("test1");
 	if (ret < 0)
 	{
 		if (ret == -1)

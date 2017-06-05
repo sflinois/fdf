@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/15 11:22:10 by sflinois          #+#    #+#             */
-/*   Updated: 2017/05/30 17:49:41 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/06/05 16:34:14 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct		s_mtx4
 
 typedef struct		s_vec4
 {
-	int				v[4];
+	double			v[4];
 }					t_vec4;
 
 int					ft_atoi(const char *str);

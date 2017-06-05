@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 14:50:45 by sflinois          #+#    #+#             */
-/*   Updated: 2017/05/15 16:45:53 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/06/05 16:40:55 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 
 void		init_line(t_line *line, t_vec4 a, t_vec4 b)
 {
-	line->dx = abs(b.v[0] - a.v[0]);
+	line->dx = fabs(b.v[0] - a.v[0]);
 	line->sx = a.v[0] < b.v[0] ? 1 : -1;
-	line->dy = abs(b.v[1] - a.v[1]);
+	line->dy = fabs(b.v[1] - a.v[1]);
 	line->sy = a.v[1] < b.v[1] ? 1 : -1;
 	line->err = (line->dx > line->dy ? line->dx : -line->dy) / 2;
 }
@@ -111,6 +111,7 @@ void		draw_map(t_struct *s)
 				s->vec[1] = s->map.p[y][x + 1];
 				s->vec[1].v[0] += s->map.mv_x;
 				s->vec[1].v[1] += s->map.mv_y;
+				ft_printf("y: %d x: %d \n", y, x);
 				draw_line(s);
 			}
 			if (y + 1 < s->map.max_y)

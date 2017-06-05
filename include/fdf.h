@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/12 12:20:02 by sflinois          #+#    #+#             */
-/*   Updated: 2017/06/01 15:13:07 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/06/05 16:37:13 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ typedef struct	s_pixel
 
 typedef struct	s_line
 {
-	int			dx;
-	int			sx;
-	int			dy;
-	int			sy;
+	double		dx;
+	double		sx;
+	double		dy;
+	double		sy;
 	int			err;
 	int			err2;
 }				t_line;
@@ -44,16 +44,16 @@ typedef struct	s_map
 
 typedef struct	s_proj
 {
-	int			max_heigth;
-	int			tile_wid;
-	int			tile_len;
-	int			half_tw;
-	int			half_tl;
-	int			max_len;
-	int			min_len;
-	int			max_wid;
-	int			min_wid;
-	int			space;
+	double		max_heigth;
+	double		tile_wid;
+	double		tile_len;
+	double		half_tw;
+	double		half_tl;
+	double		max_len;
+	double		min_len;
+	double		max_wid;
+	double		min_wid;
+	double		space;
 }				t_proj;
 
 typedef struct	s_image
@@ -74,7 +74,7 @@ typedef struct	s_struct
 	void		*win;
 	int			w_maxx;
 	int			w_maxy;
-	short			enable_color;
+	short		enable_color;
 	t_image		img;
 	t_vec4		vec[2];
 	t_map		map;

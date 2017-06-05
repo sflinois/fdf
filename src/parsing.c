@@ -6,7 +6,7 @@
 /*   By: sflinois <sflinois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/22 16:06:08 by sflinois          #+#    #+#             */
-/*   Updated: 2017/06/01 17:36:18 by sflinois         ###   ########.fr       */
+/*   Updated: 2017/06/05 15:54:06 by sflinois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,12 @@ int		check_lines_map(int fd, t_map *map)
 int		pars_args(char **argv, t_struct *s)
 {
 	int		fd;
+	int		fd2;
 	int		i;
 	int		ret;
 
 	fd = open(argv[1], O_RDONLY);
+	fd2 = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (-1);
 	if ((ret = check_first_line_map(fd, &s->map)) != 1)
@@ -94,10 +96,10 @@ int		pars_args(char **argv, t_struct *s)
 	s->map.p = (t_vec4**)malloc(sizeof(t_vec4*) * s->map.max_y);
 	while (i < s->map.max_y)
 		s->map.p[i++] = (t_vec4*)malloc(sizeof(t_vec4) * s->map.max_x);
-	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (-1);
-	insert_in_map(fd, &s->map);
+	insert_in_map(fd2, &s->map);
+	close(fd2);
 	s->map_s = s->map;
 	return (1);
 }
