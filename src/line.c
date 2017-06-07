@@ -138,5 +138,4 @@ void		draw_map(t_struct *s)
 	}
 	else
 		mlx_string_put(s->mlx, s->win, 5, 5, 0XFFFFFF, "Press \'h\' for help.");
-
 }

@@ -85,7 +85,7 @@ int		pars_args(char **argv, t_struct *s)
 
 	fd = open(argv[1], O_RDONLY);
 	fd2 = open(argv[1], O_RDONLY);
-	if (fd == -1)
+	if (fd == -1 || fd2 == -1)
 		return (-1);
 	if ((ret = check_first_line_map(fd, &s->map)) != 1)
 		return (ret);
@@ -93,11 +93,11 @@ int		pars_args(char **argv, t_struct *s)
 		return (ret);
 	close(fd);
 	i = 0;
-	s->map.p = (t_vec4**)malloc(sizeof(t_vec4*) * s->map.max_y);
+	if (!(s->map.p = (t_vec4**)ft_memalloc(sizeof(t_vec4*) * s->map.max_y)))
+		return (-4);
 	while (i < s->map.max_y)
-		s->map.p[i++] = (t_vec4*)malloc(sizeof(t_vec4) * s->map.max_x);
-	if (fd == -1)
-		return (-1);
+		if (!(s->map.p[i++] = (t_vec4*)ft_memalloc(sizeof(t_vec4) * s->map.max_x)))
+			return (-4);
 	insert_in_map(fd2, &s->map);
 	close(fd2);
 	s->map_s = s->map;

@@ -61,7 +61,7 @@ int		main(int argc, char **argv)
 	int			ret;
 
 	init_struct(&s);
-	ret = argc != 2 ? -4 : pars_args(argv, &s);
+	ret = argc != 2 ? -5 : pars_args(argv, &s);
 	if (ret < 0)
 	{
 		if (ret == -1)
@@ -71,6 +71,8 @@ int		main(int argc, char **argv)
 		if (ret == -3)
 			ft_printf("Found wrong line length. Exiting.\n");
 		if (ret == -4)
+			ft_printf("Unable to allocate memory. Exiting.\n");
+		if (ret == -5)
 			ft_printf("Usage : ./fdf <filename>\n");
 		return (1);
 	}

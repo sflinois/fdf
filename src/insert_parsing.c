@@ -39,7 +39,7 @@ int		insert_in_map(int fd, t_map *map)
 			while (str[i] == ' ' || str[i] == '\t')
 				i++;
 			if (str[i])
-				init_vec(&(map->p[y][x]), x, y, ft_atoi(str + i));
+				init_vec(&(map->p[y][x]), x, y, ft_atoi(&(str[i])));
 			while (str[i] && str[i] != ' ' && str[i] != '\t')
 				i++;
 			x++;
